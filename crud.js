@@ -10,5 +10,5 @@ const inserir = async function(nomeEst,cpfEst,dataNasc,turmaId){
     const insere="INSERT INTO estudantes(nome_est,cpf_est,data_nasc_est,turma_id) VALUES ( $1 , $2 , $3 , $4 )"
     await db.query(insere, [nomeEst, cpfEst, dataNasc, turmaId])
 }
-
+a
 module.exports = {atualizar, inserir}
