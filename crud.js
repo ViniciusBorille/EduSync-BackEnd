@@ -11,14 +11,14 @@ const inserir = async function(nomeEst,cpfEst,dataNasc,turmaId){
     await db.query(insere, [nomeEst, cpfEst, dataNasc, turmaId])
 }
 const consultar = async function() {
-    await db.connect(); // Certifique-se de que db.connect() estabelece a conexão corretamente
+    await db.connect(); 
     const consulta = 'SELECT id_dis, nome_dis, carga_horaria_dis, curso_id, Cursos.nome_cur FROM disciplinas INNER JOIN cursos ON curso_id = id_cur';
     const resultado = await db.query(consulta);
     return resultado.rows; 
 };
-const deletar = async function( condicao){
+const deletar = async function(tabela, coluna, condicao){
     await db.connect()
-    const deleta = 'DELETE FROM ${tabela} WHERE ${coluna} < $1';
-    await db.query (deleta, [tabela, coluna, condicao]);
+    const deleta = `DELETE FROM ${tabela} WHERE ${coluna} < $1 `;
+    await db.query (deleta, [condicao]);
 }
 module.exports = {atualizar, inserir, consultar, deletar}
