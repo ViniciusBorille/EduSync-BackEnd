@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router()
-const curso = require('../crud')
+const edusync = require('../crud')
 
 router.get('/', (req,res) => {
     res.send('Hello World')
 })
 
 router.patch('/atualizar/:duracao/:id', function(req,res){
-    curso.atualizar(req.params.duracao,req.params.id)
+    edusync.atualizar(req.params.duracao,req.params.id)
     .then(function(){
         res.send('A duração foi atualizada com sucesso!')
     }).catch(function(erro){
@@ -16,7 +16,7 @@ router.patch('/atualizar/:duracao/:id', function(req,res){
 })
 
 router.post('/inserir/:nome/:cpf/:nasc/:turma', function(req, res) {
-        curso.inserir( req.params.nome,  req.params.cpf,  req.params.nasc,  req.params.turma)
+        edusync.inserir( req.params.nome,  req.params.cpf,  req.params.nasc,  req.params.turma)
         .then(function(){
             res.status(201).send('Estudante inserido com sucesso!');
         }).catch( function(erro) {
@@ -24,5 +24,15 @@ router.post('/inserir/:nome/:cpf/:nasc/:turma', function(req, res) {
         res.status(500).send('Erro ao inserir estudante.');
     })
 })
+
+router.get('/consultar', async function(req, res) {
+    try {
+        const disciplinas = await edusync.consultar(); 
+        res.json(disciplinas); 
+    } catch (erro) {
+        console.error('Erro ao consultar disciplinas:', erro);
+        res.status(500).send('Erro ao consultar disciplinas.'); 
+    }
+});
 
 module.exports = router;
