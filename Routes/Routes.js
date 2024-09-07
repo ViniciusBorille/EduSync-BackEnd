@@ -25,14 +25,21 @@ router.post('/inserir/:nome/:cpf/:nasc/:turma', function(req, res) {
     })
 })
 
-router.get('/consultar', async function(req, res) {
-    try {
-        const disciplinas = await edusync.consultar(); 
-        res.json(disciplinas); 
-    } catch (erro) {
-        console.error('Erro ao consultar disciplinas:', erro);
-        res.status(500).send('Erro ao consultar disciplinas.'); 
-    }
+router.get('/consultar/:tabela', async function(req, res) {
+    edusync.consultar( req.params.tabela)
+    .then(function(){
+        res.status(200).send('Consulta efetuada com sucesso')
+    }).catch(function(erro){
+        console.error('Erro ao efetuar a consulta: ',erro);
+        res.status(404).send('Erro ao efetuar a consulta')
+    })
+    // try {
+    //     const disciplinas = await edusync.consultar(); 
+    //     res.json(disciplinas); 
+    // } catch (erro) {
+    //     console.error('Erro ao consultar disciplinas:', erro);
+    //     res.status(500).send('Erro ao consultar disciplinas.'); 
+    // }
 });
 
 module.exports = router;
