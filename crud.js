@@ -16,4 +16,9 @@ const consultar = async function(tabela) {
     const resultado = await db.query(consulta, [tabela]);
     return resultado.rows; 
 };
-module.exports = {atualizar, inserir, consultar}
+const deletar = async function(tabela, coluna, condicao){
+    await db.connect()
+    const deleta = `DELETE FROM ${tabela} WHERE ${coluna} < $1 `;
+    await db.query (deleta, [condicao]);
+}
+module.exports = {atualizar, inserir, consultar, deletar}

@@ -42,4 +42,14 @@ router.get('/consultar/:tabela', async function(req, res) {
     // }
 });
 
+router.delete('/deletar/:tabela/:coluna/:condicao', async function(req, res){
+        edusync.deletar(req.params.tabela, req.params.coluna, req.params.condicao)
+        .then(function(){
+            res.status(204).send('Deletado com sucesso!')
+        }).catch(function(erro){
+            console.error('Erro ao deletar conteudo:', erro);
+            res.status(500).send('Erro ao excluir condição');
+        })
+    
+});
 module.exports = router;
