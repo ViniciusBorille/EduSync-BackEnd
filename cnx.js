@@ -6,7 +6,7 @@ const pool = new Pool({
     host:'35.193.232.186',
     //host:'localhost',
     port:5432,
-    database:'edusync'
+    database:'edusync_dev'
 }
 )
 
