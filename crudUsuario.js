@@ -1,15 +1,20 @@
 const db = require('./models');
 
-const insereUsuario = async ({ login, senha, tipo }) => {
+const insereUsuario = async ({ nome, sobrenome, email, senha, telefone, telefone2, data_nascimento, tipo_usuario }) => {
     try {
-        if (!login || !senha || !tipo) {
-            throw new Error('Campos obrigatórios não fornecidos: login, senha ou tipo');
+        if (!nome || !sobrenome || !email || !senha || !tipo_usuario ) {
+            throw new Error('Campos obrigatórios não fornecidos!');
         }
 
-        const novoUsuario = await db.Usuarios.create({
-            login_usu: login,
-            senha_usu: senha,
-            tipo_usu: tipo,
+        const novoUsuario = await db.Usuario.create({
+            nome: nome,
+            sobrenome: sobrenome,
+            email: email,
+            senha: senha,
+            telefone: telefone,
+            telefone2: telefone2,
+            data_nascimento: data_nascimento,
+            tipo_usuario: tipo_usuario,
         });
 
         console.log('Usuário criado com sucesso:', novoUsuario);
@@ -28,7 +33,7 @@ const insereUsuario = async ({ login, senha, tipo }) => {
 
 const deletaUsuario = async (usuarioId) => {
     try {
-        const resultado = await db.Usuarios.destroy({
+        const resultado = await usuario.Usuarios.destroy({
             where: {
                 id_usu: usuarioId,
             },

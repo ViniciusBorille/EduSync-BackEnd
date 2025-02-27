@@ -1,5 +1,5 @@
 const db=require('./models');
-const Alunos = require('./models/alunos');
+const Alunos = require('./models/aluno');
 
 const insereAluno = async(id,nome,cpf,email,tel,tel2,mae,pai,end)=>{
     const novoAluno = await db.Alunos.create({

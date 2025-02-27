@@ -6,13 +6,22 @@ const Usuarios=require('../crudUsuario')
 router.post('/cadusuario', async (req, res) => {
   try {
     console.log('Dados recebidos no backend:', req.body);
-    const { login, senha, tipo } = req.body;
+    const { 
+        nome,
+        sobrenome,
+        email,
+        senha,
+        telefone,
+        telefone2,
+        data_nascimento,
+        tipo_usuario,
+     } = req.body;
 
-    if (!login || !senha || !tipo) {
+    if (!nome || !sobrenome || !email || !senha || !tipo_usuario ) {
       return res.status(400).json({ mensagem: 'Campos obrigatórios não fornecidos' });
     }
 
-    const usuario = await Usuarios.insereUsuario({ login, senha, tipo });
+    const usuario = await Usuarios.insereUsuario({ nome, sobrenome, email, senha, telefone, telefone2, data_nascimento, tipo_usuario });
     res.status(201).json({ mensagem: 'Usuário criado com sucesso!', usuario });
   } catch (error) {
     console.error('Erro interno do servidor:', error);
