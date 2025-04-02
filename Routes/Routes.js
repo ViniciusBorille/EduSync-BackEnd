@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Alunos=require('../crudAluno')
-const Usuarios=require('../crudUsuario')
+const Usuarios=require('../seeders/CadastroUsuario')
 
 router.post('/cadusuario', async (req, res) => {
   try {
@@ -9,6 +8,7 @@ router.post('/cadusuario', async (req, res) => {
     const { 
         nome,
         sobrenome,
+        cpf, 
         email,
         senha,
         telefone,
@@ -17,11 +17,11 @@ router.post('/cadusuario', async (req, res) => {
         tipo_usuario,
      } = req.body;
 
-    if (!nome || !sobrenome || !email || !senha || !tipo_usuario ) {
+    if (!nome || !sobrenome || !cpf || !email || !senha || !tipo_usuario ) {
       return res.status(400).json({ mensagem: 'Campos obrigatórios não fornecidos' });
     }
 
-    const usuario = await Usuarios.insereUsuario({ nome, sobrenome, email, senha, telefone, telefone2, data_nascimento, tipo_usuario });
+    const usuario = await Usuarios.insereUsuario({ nome, sobrenome, cpf, email, senha, telefone, telefone2, data_nascimento, tipo_usuario });
     res.status(201).json({ mensagem: 'Usuário criado com sucesso!', usuario });
   } catch (error) {
     console.error('Erro interno do servidor:', error);
