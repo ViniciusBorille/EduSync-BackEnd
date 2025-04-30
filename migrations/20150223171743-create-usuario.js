@@ -17,6 +17,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      cpf: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -36,7 +41,7 @@ module.exports = {
         type: Sequelize.DATE
       },
       tipo_usuario: {
-        type: Sequelize.ENUM('aluno', 'professor', 'funcionario', 'responsavel'), 
+        type: Sequelize.ENUM('aluno', 'funcionario', 'professor', 'responsavel'), 
         allowNull: false 
       },
       ativo: {
