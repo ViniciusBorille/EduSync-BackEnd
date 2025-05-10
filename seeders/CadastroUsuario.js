@@ -5,19 +5,6 @@ const { validaUsuario } = require('../validators/dadosValidator')
 const insereUsuario = async ({ nome, sobrenome, cpf, email, senha, telefone, telefone2, data_nascimento, tipo_usuario }) => {
     
     try {
-        // const verificaçãoUsuario = validaUsuario(
-        //     nome,
-        //     cpf,
-        //     email,
-        //     telefone,
-        //     telefone2,
-        //     senha,
-        //    // senha, // confirmação
-        //     tipo_usuario,
-        //     data_nascimento
-        // );        if (!verificaçãoUsuario) {
-        //     throw new Error('Erro nos dados!');
-        // }
 
         const hashSenha = await bcrypt.hash(senha, 10);
 
