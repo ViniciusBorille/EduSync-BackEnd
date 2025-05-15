@@ -29,7 +29,7 @@ const loginUsuario = async (user, senha) => {
             tipo_usuario: usuario.tipo_usuario,
             email: usuario.email
         }
-        const accessToken = gerarAcessToken(payload)
+        const accessToken = gerarAccessToken(payload)
         const refreshToken = gerarRefreshToken(payload)
 
         return {
@@ -45,7 +45,7 @@ const loginUsuario = async (user, senha) => {
     } catch (error) {
         throw new Error(`Erro no login: ${error.message}`);
     }
-},
+}
 
 const refresh = async (req, res) => {
     const { refreshToken } = req.body;
@@ -66,7 +66,7 @@ const refresh = async (req, res) => {
     const novoAccessToken = gerarAcessToken(payload)
 
     res.json({ accesToken: novoAccessToken })
-},
+}
 
 const logout = async (req, res) => {
     const { refreshToken } = req.body;
